@@ -13,35 +13,27 @@ on:
 jobs:
     create-patch:
         runs-on: ubuntu-latest
+        if: startsWith(github.event.issue.title, 'Patch:')
         steps:
-            - name: Commit files
+            - uses: actions/checkout@v2
+            - name: Checkout nopCommerce
+              run: git clone https://github.com/nopSolutions/nopCommerce
+            - name: Create directory
+              run: mkdir ./patches/
+            - name: Create Patch
               run: |
                   title="${{ github.event.issue.title }}"
                   shas=${title/Patch: /""}
                   echo "$shas"
                   IFS=_ read startSha endSha <<< $shas
-                  echo "$startSha"
-                  echo "$endSha"
-            # - name: Commit files 2
-            #   run: |
-            #     echo "$startSha"
-            #     echo "$endSha"
-            # - uses: actions/checkout@v2
-            # - run: git clone https://github.com/nopSolutions/nopCommerce
-            # - run: mkdir ./patches/
-            # - run: git --git-dir ./nopCommerce/.git diff ${{ github.event.inputs.startSha }}\^..${{ github.event.inputs.endSha }} --relative=src > ./patches/${{ github.event.inputs.startSha }}_${{ github.event.inputs.endSha }}.patch
-            # - uses: papeloto/action-zip@v1
-            #   with:
-            #       files: ./patches/${{ github.event.inputs.startSha }}_${{ github.event.inputs.endSha }}.patch
-            #       dest: ./patches/${{ github.event.inputs.startSha }}_${{ github.event.inputs.endSha }}.zip
-            # - name: Commit files
-            #   run: |
-            #       git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            #       git config user.name "github-actions[bot]"
-            #       git add ./patches/${{ github.event.inputs.startSha }}_${{ github.event.inputs.endSha }}.zip
-            #       git commit -m "Add changes"
-            # - name: Push changes
-            #   uses: ad-m/github-push-action@master
-            #   with:
-            #       github_token: ${{ secrets.GITHUB_TOKEN }}
-            #       branch: ${{ github.ref }}
+                  git --git-dir ./nopCommerce/.git diff $startSha\^..$endSha --relative=src > ./patches/$startSha_$endSha.patch
+                  zip ./patches/$startSha_$endSha.zip ./patches/$startSha_$endSha.patch
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git config user.name "github-actions[bot]"
+                  git add ./patches/$startSha_$endSha.zip
+                  git commit -m "Add new patch"
+            - name: Push changes
+              uses: ad-m/github-push-action@master
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  branch: ${{ github.ref }}
