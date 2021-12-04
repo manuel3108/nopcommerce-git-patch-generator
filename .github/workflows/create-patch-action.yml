@@ -1,3 +1,5 @@
+name: Create Patch
+
 on:
     workflow_dispatch:
         inputs:
@@ -12,7 +14,7 @@ jobs:
         steps:
             - uses: actions/checkout@master
               with:
-                  name: nopSolution/nopCommerce
+                  repository: nopSolution/nopCommerce
             - run: mkdir ./patches/
             - run: git --git-dir ./nopCommerce/.git diff ${{ github.event.inputs.startSha }}\^..${{ github.event.inputs.endSha }} --relative=src > ./patches/${{ github.event.inputs.startSha }}_${{ github.event.inputs.endSha }}.patch
             - name: Commit files
