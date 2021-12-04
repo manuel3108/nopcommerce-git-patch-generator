@@ -3,14 +3,14 @@ on:
         inputs:
             startSha:
                 required: true
-            startSha:
+            endSha:
                 required: true
 
 jobs:
     printInputs:
         runs-on: ubuntu-latest
         steps:
-          - uses: actions/checkout@master
-            with:
-              name: nopSolution/nopCommerce  
-          - run: git --git-dir ./nopCommerce/.git diff ${{ github.event.inputs.startSha }}\^..${{ github.event.inputs.endSha }} --relative=src >
+            - uses: actions/checkout@master
+              with:
+                  name: nopSolution/nopCommerce
+            - run: git --git-dir ./nopCommerce/.git diff ${{ github.event.inputs.startSha }}\^..${{ github.event.inputs.endSha }} --relative=src >
