@@ -1,0 +1,18 @@
+name: Create Patch Action
+
+on:
+  workflow_dispatch:
+    inputs:
+      startSha:
+        required: true
+      startSha:
+        required: true
+
+jobs:
+    create-patch-action:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@master
+              with:
+                name: nopSolution/nopCommerce  
+            - run: git --git-dir ./nopCommerce/.git diff ${{ github.event.inputs.startSha }}\^..${{ github.event.inputs.endSha }} --relative=src >
