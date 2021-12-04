@@ -18,13 +18,13 @@ jobs:
             - run: git --git-dir ./nopCommerce/.git diff ${{ github.event.inputs.startSha }}\^..${{ github.event.inputs.endSha }} --relative=src > ./patches/${{ github.event.inputs.startSha }}_${{ github.event.inputs.endSha }}.patch
             - uses: papeloto/action-zip@v1
               with:
-                files: ./patches/${{ github.event.inputs.startSha }}_${{ github.event.inputs.endSha }}.patch
-                dest: ./patches/${{ github.event.inputs.startSha }}_${{ github.event.inputs.endSha }}.zip
+                  files: ./patches/${{ github.event.inputs.startSha }}_${{ github.event.inputs.endSha }}.patch
+                  dest: ./patches/${{ github.event.inputs.startSha }}_${{ github.event.inputs.endSha }}.zip
             - name: Commit files
               run: |
                   git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
                   git config user.name "github-actions[bot]"
-                  git add ./patches/${{ github.event.inputs.startSha }}_${{ github.event.inputs.endSha }}.patch
+                  git add ./patches/${{ github.event.inputs.startSha }}_${{ github.event.inputs.endSha }}.zip
                   git commit -m "Add changes"
             - name: Push changes
               uses: ad-m/github-push-action@master
