@@ -7,20 +7,21 @@ on:
                 required: true
 
 jobs:
-    printInputs:
+    create-patch:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@master
               with:
                   name: nopSolution/nopCommerce
+            - run: mkdir ./patches/
             - run: git --git-dir ./nopCommerce/.git diff ${{ github.event.inputs.startSha }}\^..${{ github.event.inputs.endSha }} --relative=src > ./patches/${{ github.event.inputs.startSha }}_${{ github.event.inputs.endSha }}.patch
             - name: Commit files
               run: |
-                git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-                git config --local user.name "github-actions[bot]"
-                git commit -m "Add changes" -a
+                  git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git config --local user.name "github-actions[bot]"
+                  git commit -m "Add changes" -a
             - name: Push changes
               uses: ad-m/github-push-action@master
               with:
-                github_token: ${{ secrets.GITHUB_TOKEN }}
-                branch: ${{ github.ref }}
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  branch: ${{ github.ref }}
