@@ -12,6 +12,7 @@ jobs:
     create-patch:
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v2
             - run: git clone https://github.com/nopSolutions/nopCommerce
             - run: mkdir ./patches/
             - run: git --git-dir ./nopCommerce/.git diff ${{ github.event.inputs.startSha }}\^..${{ github.event.inputs.endSha }} --relative=src > ./patches/${{ github.event.inputs.startSha }}_${{ github.event.inputs.endSha }}.patch
