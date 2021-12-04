@@ -16,6 +16,10 @@ jobs:
             - run: git clone https://github.com/nopSolutions/nopCommerce
             - run: mkdir ./patches/
             - run: git --git-dir ./nopCommerce/.git diff ${{ github.event.inputs.startSha }}\^..${{ github.event.inputs.endSha }} --relative=src > ./patches/${{ github.event.inputs.startSha }}_${{ github.event.inputs.endSha }}.patch
+            - uses: papeloto/action-zip@v1
+              with:
+                files: ./patches/${{ github.event.inputs.startSha }}_${{ github.event.inputs.endSha }}.patch
+                dest: ./patches/${{ github.event.inputs.startSha }}_${{ github.event.inputs.endSha }}.zip
             - name: Commit files
               run: |
                   git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
