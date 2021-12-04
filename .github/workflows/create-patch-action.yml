@@ -19,7 +19,9 @@ jobs:
                 title="${{ github.event.issue.title }}"
                 shas=${title/Patch: /""}
                 echo "$shas"
-                IFS=_ read startSha endSha <<< shas
+                IFS=_ read startSha endSha <<< $shas
+            - name: Commit files 2
+              run: |
                 echo "$startSha"
                 echo "$endSha"
             # - uses: actions/checkout@v2
