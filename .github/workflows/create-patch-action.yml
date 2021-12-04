@@ -16,14 +16,16 @@ jobs:
         steps:
             - name: Commit files
               run: |
-                title="${{ github.event.issue.title }}"
-                shas=${title/Patch: /""}
-                echo "$shas"
-                IFS=_ read startSha endSha <<< $shas
-            - name: Commit files 2
-              run: |
-                echo "$startSha"
-                echo "$endSha"
+                  title="${{ github.event.issue.title }}"
+                  shas=${title/Patch: /""}
+                  echo "$shas"
+                  IFS=_ read startSha endSha <<< $shas
+                  echo "$startSha"
+                  echo "$endSha"
+            # - name: Commit files 2
+            #   run: |
+            #     echo "$startSha"
+            #     echo "$endSha"
             # - uses: actions/checkout@v2
             # - run: git clone https://github.com/nopSolutions/nopCommerce
             # - run: mkdir ./patches/
