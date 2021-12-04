@@ -22,7 +22,6 @@ jobs:
               run: |
                   title="${{ github.event.issue.title }}"
                   shas=${title/Patch: /""}
-                  echo "$shas"
                   IFS=_ read startSha endSha <<< $shas
                   git --git-dir ./nopCommerce/.git diff $startSha\^..$endSha --relative=src > ./patches/$startSha_$endSha.patch
                   zip ./patches/$startSha_$endSha.zip ./patches/$startSha_$endSha.patch
