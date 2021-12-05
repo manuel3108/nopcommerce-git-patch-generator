@@ -36,8 +36,7 @@ jobs:
           shas=${title/Patch: /""}
           IFS=_ read startSha endSha <<< $shas
           git --git-dir ./nopCommerce/.git diff $startSha\^..$endSha --relative=src > ./patches/${startSha}_$endSha.patch
-          zip -FS -j -9 ./patches/${startSha}_$endSha.zip ./patches/${startSha}_$endSha.patch
-          echo ::set-output name=file_path::"./patches/${startSha}_$endSha.zip"
+          echo ::set-output name=file_path::"./patches/${startSha}_$endSha.patch"
       - name: Update release
         uses: xresloader/upload-to-github-release@v1
         env:
