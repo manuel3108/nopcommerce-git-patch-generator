@@ -16,6 +16,11 @@ jobs:
         if: startsWith(github.event.issue.title, 'Patch:')
         steps:
             - uses: actions/checkout@v2
+            - name: Add patch label
+              uses: andymckay/labeler@5c59dabdfd4dd5bd9c6e6d255b01b9d764af4414
+              with:
+                  add-labels: 'patch'
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
             - name: Add comment
               uses: peter-evans/create-or-update-comment@a35cf36e5301d70b76f316e867e7788a55a31dae
               with:
@@ -40,9 +45,9 @@ jobs:
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   branch: ${{ github.ref }}
-            - name: Add comment
-              uses: peter-evans/create-or-update-comment@a35cf36e5301d70b76f316e867e7788a55a31dae
+            - name: Add comment & close issue
+              uses: peter-evans/close-issue@v1
               with:
-                  issue-number: ${{ github.event.issue.number }}
-                  body: |
-                      We successfully generated your patch file. Please go back to the website an re-enter your details to download the file.
+                  comment: |
+                      We successfully generated your patch file. 
+                      Please go back to the website an re-enter your details to download the file.
