@@ -37,13 +37,13 @@ jobs:
           git --git-dir ./nopCommerce/.git diff $startSha\^..$endSha --relative=src > ./patches/${startSha}_$endSha.patch
           zip -FS -j -9 ./patches/${startSha}_$endSha.zip ./patches/${startSha}_$endSha.patch
       - name: Update release
-        uses: johnwbyrd/update-release@v1
+        uses: johnwbyrd/update-release@v1.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           files: ./patches/${startSha}_$endSha.zip
           release: Patch Bundle Release
       - name: Add comment & close issue
-        uses: peter-evans/close-issue@v1.0.0
+        uses: peter-evans/close-issue@v1
         with:
           comment: |
             We successfully generated your patch file. 
