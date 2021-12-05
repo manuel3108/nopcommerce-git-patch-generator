@@ -36,15 +36,12 @@ jobs:
           IFS=_ read startSha endSha <<< $shas
           git --git-dir ./nopCommerce/.git diff $startSha\^..$endSha --relative=src > ./patches/${startSha}_$endSha.patch
           zip -FS -j -9 ./patches/${startSha}_$endSha.zip ./patches/${startSha}_$endSha.patch
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
-          git add ./patches/${startSha}_$endSha.zip
-          git commit -m "Add new patch"
-      - name: Push changes
-        uses: ad-m/github-push-action@master
+      - name: Update release
+        uses: johnwbyrd/update-release@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          files: ./patches/${startSha}_$endSha.zip
+          release: Patch Bundle Release
       - name: Add comment & close issue
         uses: peter-evans/close-issue@v1
         with:
