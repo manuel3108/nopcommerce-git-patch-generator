@@ -15,7 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     if: startsWith(github.event.issue.title, 'Patch:')
     steps:
-      - uses: actions/checkout@v2
       - name: Add patch label
         uses: andymckay/labeler@5c59dabdfd4dd5bd9c6e6d255b01b9d764af4414
         with:
@@ -27,6 +26,7 @@ jobs:
           issue-number: ${{ github.event.issue.number }}
           body: |
             We just kicked off an action to generate the patch file for you. We will let you know here in a few minutes when your patch file is ready.
+      - uses: actions/checkout@v2
       - name: Checkout nopCommerce
         run: git clone https://github.com/nopSolutions/nopCommerce
       - name: Create Patch
