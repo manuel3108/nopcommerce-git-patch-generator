@@ -36,11 +36,12 @@ jobs:
           IFS=_ read startSha endSha <<< $shas
           git --git-dir ./nopCommerce/.git diff $startSha\^..$endSha --relative=src > ./patches/${startSha}_$endSha.patch
           zip -FS -j -9 ./patches/${startSha}_$endSha.zip ./patches/${startSha}_$endSha.patch
+          echo ::set-output name=file_path::"./patches/${startSha}_$endSha.zip"
       - name: Update release
         uses: johnwbyrd/update-release@v1.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          files: ./patches/${startSha}_$endSha.zip
+          files: ${{ steps.vars.outputs.file_path }}
           release: Patch Bundle Release
       - name: Add comment & close issue
         uses: peter-evans/close-issue@v1
