@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="description" content="" />
+		<link rel="icon" href="/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+
+		
+
+		<link rel="modulepreload" href="/_app/start-1a7d424d.js">
+		<link rel="modulepreload" href="/_app/chunks/vendor-e558177d.js">
+		<link rel="modulepreload" href="/_app/pages/__layout.svelte-d8edd05d.js">
+		<link rel="modulepreload" href="/_app/pages/index.svelte-4fb9f97f.js">
+		<link rel="stylesheet" href="/_app/assets/start-61d1577b.css">
+		<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-375e3201.css">
+		<link rel="stylesheet" href="/_app/assets/pages/index.svelte-c446ef88.css">
+
+		<script type="module">
+			import { start } from "/_app/start-1a7d424d.js";
+			start({
+				target: document.querySelector("#svelte"),
+				paths: {"base":"","assets":""},
+				session: {},
+				host: location.host,
+				route: true,
+				spa: false,
+				trailing_slash: "never",
+				hydrate: {
+					status: 200,
+					error: null,
+					nodes: [
+						import("/_app/pages/__layout.svelte-d8edd05d.js"),
+						import("/_app/pages/index.svelte-4fb9f97f.js")
+					],
+					page: {
+						host: location.host, // TODO this is redundant
+						path: "\u002F",
+						query: new URLSearchParams(""),
+						params: {}
+					}
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<div id="svelte">
+
+
+<nav class="navbar svelte-xt4ytl" role="navigation" aria-label="main navigation"><div class="navbar-brand"><div class="navbar-item"><a href="/"><img src="/favicon.png" alt="Plugin Gleisbelegung Logo" class="svelte-xt4ytl"></a>
+			NopCommerce Patch Generator
+		</div></div>
+	<div class="navbar-menu"></div>
+</nav>
+
+<main class="svelte-10hoedr"><div class="box split svelte-16969x1"><div class="field svelte-16969x1"><label class="label">Start tag (oldest)</label>
+		<div class="control svelte-16969x1"><select class="select"><option disabled selected hidden value="">---</option></select></div></div>
+	<div class="field svelte-16969x1"><label class="label">End tag (newest)</label>
+		<div class="control svelte-16969x1"><select class="select"><option disabled selected hidden value="">---</option></select></div></div></div>
+
+<div class="box split svelte-16969x1"><div class="field svelte-16969x1"><label class="label">Start commit (oldest)</label>
+		<div class="control svelte-16969x1"><input value=""></div></div>
+	<div class="field svelte-16969x1"><label class="label">End commit (newest)</label>
+		<div class="control svelte-16969x1"><input value=""></div></div></div>
+
+<div class="box">Please select by tags or commits</div>
+
+
+</main>
+
+
+
+			
+		</div>
+	</body>
+</html>
