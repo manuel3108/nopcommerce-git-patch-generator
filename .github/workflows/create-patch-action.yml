@@ -46,6 +46,7 @@ jobs:
           file: ${{ steps.patch.outputs.file_path }}
           overwrite: true
           update_latest_release: true
+          draft: false
       - name: Add comment & close issue
         uses: peter-evans/close-issue@v1
         with:
