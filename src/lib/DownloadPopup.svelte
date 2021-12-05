@@ -11,12 +11,18 @@
 			<button class="delete" aria-label="close" on:click={() => (isOpen = false)} />
 		</header>
 		<section class="modal-card-body">
-			cd your-working-dir<br />
-			git apply {fileName}
+			<pre>
+cd your-working-dir
+git apply {fileName}
+			</pre>
 		</section>
 		<footer class="modal-card-foot">
-			<button class="button is-success">Save changes</button>
-			<button class="button">Cancel</button>
+			<button
+				class="button is-success"
+				on:click={() => navigator.clipboard.writeText(`git apply ${fileName}`)}
+				>Copy Git Command</button
+			>
+			<button class="button" on:click={() => (isOpen = false)}>Cancel</button>
 		</footer>
 	</div>
 </div>
