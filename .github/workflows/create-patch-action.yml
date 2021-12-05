@@ -37,6 +37,8 @@ jobs:
           IFS=_ read startSha endSha <<< $shas
           git --git-dir ./nopCommerce/.git diff $startSha\^..$endSha --relative=src > ./${startSha}_$endSha.patch
           echo ::set-output name=file_path::"./${startSha}_$endSha.patch"
+          echo ::set-output name=startSha::"${startSha}"
+          echo ::set-output name=endSha::"${endSha}"
       - name: Update release
         uses: xresloader/upload-to-github-release@v1
         env:
@@ -51,4 +53,4 @@ jobs:
         with:
           comment: |
             We successfully generated your patch file. 
-            Please go back to the website an re-enter your details to download the file.
+            [Please go back to the website](https://nopcommerce-patches.serret.dev/?startSha=${{ steps.patch.outputs.startSha }}&endSha=${{ steps.patch.outputs.endSha }}) and download your patch file!

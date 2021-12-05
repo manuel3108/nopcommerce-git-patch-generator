@@ -1,7 +1,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
 	<div class="navbar-brand">
 		<div class="navbar-item">
-			<a href="/"><img src="/favicon.png" alt="Plugin Gleisbelegung Logo" /></a>
+			<a href="/"><img src="/favicon.png" alt="NopCommerce Patch Generator" /></a>
 			NopCommerce Patch Generator
 		</div>
 	</div>

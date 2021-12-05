@@ -25,6 +25,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"new-github-issue-url": "^1.0.0",
 		"octokit": "^1.7.1"
 	}
 }

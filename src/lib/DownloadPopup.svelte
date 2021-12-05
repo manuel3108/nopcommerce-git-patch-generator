@@ -7,8 +7,8 @@
 	<div class="modal-background" on:click={() => (isOpen = false)} />
 	<div class="modal-card">
 		<header class="modal-card-head">
-			<p class="modal-card-title">Modal title</p>
-			<button class="delete" aria-label="close" />
+			<p class="modal-card-title">How to apply the downloaded git patch file?</p>
+			<button class="delete" aria-label="close" on:click={() => (isOpen = false)} />
 		</header>
 		<section class="modal-card-body">
 			cd your-working-dir<br />
