@@ -105,8 +105,8 @@ Overall the process should not take you more then five minutes.
 		We will guide you throgh the process from here on.<br />
 		<a href={generateGithubIssueUrl()} class="button is-primary">Create an issue on Github!</a>
 	{:else}
-		<button class="button is-primary" href={downloadUrl} on:click={() => (downloading = true)}
-			>Download</button
+		<a class="button is-primary" href={downloadUrl} on:click={() => (downloading = true)}
+			>Download</a
 		>
 	{/if}
 </div>
