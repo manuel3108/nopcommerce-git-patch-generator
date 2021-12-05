@@ -30,6 +30,7 @@ jobs:
       - name: Checkout nopCommerce
         run: git clone https://github.com/nopSolutions/nopCommerce
       - name: Create Patch
+        id: patch
         run: |
           title="${{ github.event.issue.title }}"
           shas=${title/Patch: /""}
@@ -42,7 +43,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: ${{ steps.vars.outputs.file_path }}
+          file: ${{ steps.patch.outputs.file_path }}
           overwrite: true
           update_latest_release: true
       - name: Add comment & close issue
