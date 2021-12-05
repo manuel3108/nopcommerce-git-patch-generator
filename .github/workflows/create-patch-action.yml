@@ -40,7 +40,7 @@ jobs:
       - name: Update release
         uses: xresloader/upload-to-github-release@v1
         env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           file: ${{ steps.vars.outputs.file_path }}
           overwrite: true
