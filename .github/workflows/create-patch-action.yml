@@ -23,11 +23,11 @@ jobs:
                   title="${{ github.event.issue.title }}"
                   shas=${title/Patch: /""}
                   IFS=_ read startSha endSha <<< $shas
-                  git --git-dir ./nopCommerce/.git diff $startSha\^..$endSha --relative=src > ./patches/$startSha_$endSha.patch
-                  zip ./patches/$startSha_$endSha.zip ./patches/$startSha_$endSha.patch
+                  git --git-dir ./nopCommerce/.git diff $startSha\^..$endSha --relative=src > ./patches/${startSha}_$endSha.patch
+                  zip ./patches/${startSha}_$endSha.zip ./patches/${startSha}_$endSha.patch
                   git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
                   git config user.name "github-actions[bot]"
-                  git add ./patches/$startSha_$endSha.zip
+                  git add ./patches/${startSha}_$endSha.zip
                   git commit -m "Add new patch"
             - name: Push changes
               uses: ad-m/github-push-action@master
