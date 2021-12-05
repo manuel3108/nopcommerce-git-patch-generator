@@ -38,11 +38,13 @@ jobs:
           zip -FS -j -9 ./patches/${startSha}_$endSha.zip ./patches/${startSha}_$endSha.patch
           echo ::set-output name=file_path::"./patches/${startSha}_$endSha.zip"
       - name: Update release
-        uses: johnwbyrd/update-release@v1.0.0
+        uses: xresloader/upload-to-github-release@v1
+        env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          files: ${{ steps.vars.outputs.file_path }}
-          release: Patch Bundle Release
+          file: ${{ steps.vars.outputs.file_path }}
+          overwrite: true
+          update_latest_release: true
       - name: Add comment & close issue
         uses: peter-evans/close-issue@v1
         with:
