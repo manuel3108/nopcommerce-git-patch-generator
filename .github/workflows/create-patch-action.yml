@@ -43,7 +43,7 @@ jobs:
           files: ./patches/${startSha}_$endSha.zip
           release: Patch Bundle Release
       - name: Add comment & close issue
-        uses: peter-evans/close-issue@v1
+        uses: peter-evans/close-issue@v1.0.0
         with:
           comment: |
             We successfully generated your patch file. 
