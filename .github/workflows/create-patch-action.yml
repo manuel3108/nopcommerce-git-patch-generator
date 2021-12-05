@@ -1,53 +1,53 @@
 name: Create Patch
 
 on:
-    issues:
-        types: [opened]
-    workflow_dispatch:
-        inputs:
-            startSha:
-                required: true
-            endSha:
-                required: true
+  issues:
+    types: [opened]
+  workflow_dispatch:
+    inputs:
+      startSha:
+        required: true
+      endSha:
+        required: true
 
 jobs:
-    create-patch:
-        runs-on: ubuntu-latest
-        if: startsWith(github.event.issue.title, 'Patch:')
-        steps:
-            - uses: actions/checkout@v2
-            - name: Add patch label
-              uses: andymckay/labeler@5c59dabdfd4dd5bd9c6e6d255b01b9d764af4414
-              with:
-                  add-labels: 'patch'
-                  repo-token: ${{ secrets.GITHUB_TOKEN }}
-            - name: Add comment
-              uses: peter-evans/create-or-update-comment@a35cf36e5301d70b76f316e867e7788a55a31dae
-              with:
-                  issue-number: ${{ github.event.issue.number }}
-                  body: |
-                      We just kicked off an action to generate the patch file for you. We will let you know here in a few minutes when your patch file is ready.
-            - name: Checkout nopCommerce
-              run: git clone https://github.com/nopSolutions/nopCommerce
-            - name: Create Patch
-              run: |
-                  title="${{ github.event.issue.title }}"
-                  shas=${title/Patch: /""}
-                  IFS=_ read startSha endSha <<< $shas
-                  git --git-dir ./nopCommerce/.git diff $startSha\^..$endSha --relative=src > ./patches/${startSha}_$endSha.patch
-                  zip -9 ./patches/${startSha}_$endSha.zip ./patches/${startSha}_$endSha.patch
-                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-                  git config user.name "github-actions[bot]"
-                  git add ./patches/${startSha}_$endSha.zip
-                  git commit -m "Add new patch"
-            - name: Push changes
-              uses: ad-m/github-push-action@master
-              with:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-                  branch: ${{ github.ref }}
-            - name: Add comment & close issue
-              uses: peter-evans/close-issue@v1
-              with:
-                  comment: |
-                      We successfully generated your patch file. 
-                      Please go back to the website an re-enter your details to download the file.
+  create-patch:
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.issue.title, 'Patch:')
+    steps:
+      - uses: actions/checkout@v2
+      - name: Add patch label
+        uses: andymckay/labeler@5c59dabdfd4dd5bd9c6e6d255b01b9d764af4414
+        with:
+          add-labels: 'patch'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Add comment
+        uses: peter-evans/create-or-update-comment@a35cf36e5301d70b76f316e867e7788a55a31dae
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            We just kicked off an action to generate the patch file for you. We will let you know here in a few minutes when your patch file is ready.
+      - name: Checkout nopCommerce
+        run: git clone https://github.com/nopSolutions/nopCommerce
+      - name: Create Patch
+        run: |
+          title="${{ github.event.issue.title }}"
+          shas=${title/Patch: /""}
+          IFS=_ read startSha endSha <<< $shas
+          git --git-dir ./nopCommerce/.git diff $startSha\^..$endSha --relative=src > ./patches/${startSha}_$endSha.patch
+          zip -FS -j -9 ./patches/${startSha}_$endSha.zip ./patches/${startSha}_$endSha.patch
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add ./patches/${startSha}_$endSha.zip
+          git commit -m "Add new patch"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+      - name: Add comment & close issue
+        uses: peter-evans/close-issue@v1
+        with:
+          comment: |
+            We successfully generated your patch file. 
+            Please go back to the website an re-enter your details to download the file.
