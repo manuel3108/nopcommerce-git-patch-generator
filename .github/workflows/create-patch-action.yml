@@ -35,7 +35,7 @@ jobs:
                   shas=${title/Patch: /""}
                   IFS=_ read startSha endSha <<< $shas
                   git --git-dir ./nopCommerce/.git diff $startSha\^..$endSha --relative=src > ./patches/${startSha}_$endSha.patch
-                  zip ./patches/${startSha}_$endSha.zip ./patches/${startSha}_$endSha.patch
+                  zip -9 ./patches/${startSha}_$endSha.zip ./patches/${startSha}_$endSha.patch
                   git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
                   git config user.name "github-actions[bot]"
                   git add ./patches/${startSha}_$endSha.zip
