@@ -9,16 +9,16 @@
 
 		
 
-		<link rel="modulepreload" href="/_app/start-d6b57377.js">
+		<link rel="modulepreload" href="/_app/start-7aad1b6c.js">
 		<link rel="modulepreload" href="/_app/chunks/vendor-ec2a0a5f.js">
 		<link rel="modulepreload" href="/_app/pages/__layout.svelte-9fc284f3.js">
-		<link rel="modulepreload" href="/_app/pages/index.svelte-0fb79a6c.js">
+		<link rel="modulepreload" href="/_app/pages/index.svelte-5b087595.js">
 		<link rel="stylesheet" href="/_app/assets/start-61d1577b.css">
 		<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-375e3201.css">
-		<link rel="stylesheet" href="/_app/assets/pages/index.svelte-c446ef88.css">
+		<link rel="stylesheet" href="/_app/assets/pages/index.svelte-0031fbe2.css">
 
 		<script type="module">
-			import { start } from "/_app/start-d6b57377.js";
+			import { start } from "/_app/start-7aad1b6c.js";
 			start({
 				target: document.querySelector("#svelte"),
 				paths: {"base":"","assets":""},
@@ -32,7 +32,7 @@
 					error: null,
 					nodes: [
 						import("/_app/pages/__layout.svelte-9fc284f3.js"),
-						import("/_app/pages/index.svelte-0fb79a6c.js")
+						import("/_app/pages/index.svelte-5b087595.js")
 					],
 					page: {
 						host: location.host, // TODO this is redundant
@@ -54,17 +54,33 @@
 	<div class="navbar-menu"></div>
 </nav>
 
-<main class="svelte-10hoedr"><div class="box split svelte-16969x1"><div class="field svelte-16969x1"><label class="label">Start tag (oldest)</label>
-		<div class="control svelte-16969x1"><select class="select"><option disabled selected hidden value="">---</option></select></div></div>
-	<div class="field svelte-16969x1"><label class="label">End tag (newest)</label>
-		<div class="control svelte-16969x1"><select class="select"><option disabled selected hidden value="">---</option></select></div></div></div>
+<main class="svelte-10hoedr"><div class="box split"><h1 class="title">NopCommerce Patch Generator</h1>
+	<p>This tool generates a patches for NopCommerce. In order to download your patch file, please
+		select the NopCommerce release from an dropdown, or enter the start and end sha manually.
+	</p>
+	<br>
+	<ul class="notes svelte-11u8c3u">Aditional notes:<br>
+		<li>The patch file will be created relatively to the src directory of the nopcommerce repository.
+			Please be sure to apply your patch in the root of your project.
+		</li>
+		<li>The patch will also include update binary files such as images and dll&#39;s.</li>
+		<li>If the patch file for your selection does not exist, we will redirect you to Github to create
+			an issue. From there on an automatic process takes places, and will generete the patch file
+			you. After the patch file is generated, you will be redirected back to the website to download
+			the patch.
+		</li></ul></div>
 
-<div class="box split svelte-16969x1"><div class="field svelte-16969x1"><label class="label">Start commit (oldest)</label>
-		<div class="control svelte-16969x1"><input value=""></div></div>
-	<div class="field svelte-16969x1"><label class="label">End commit (newest)</label>
-		<div class="control svelte-16969x1"><input value=""></div></div></div>
+<div class="box split svelte-11u8c3u"><div class="field svelte-11u8c3u"><label class="label">Start tag (older release)</label>
+		<div class="control svelte-11u8c3u"><select class="select"><option disabled selected hidden value="">---</option></select></div></div>
+	<div class="field svelte-11u8c3u"><label class="label">End tag (newer release)</label>
+		<div class="control svelte-11u8c3u"><select class="select"><option disabled selected hidden value="">---</option></select></div></div></div>
 
-<div class="box">Please select by tags or commits</div>
+<div class="box split svelte-11u8c3u"><div class="field svelte-11u8c3u"><label class="label">Start commit (older commit)</label>
+		<div class="control svelte-11u8c3u"><input value=""></div></div>
+	<div class="field svelte-11u8c3u"><label class="label">End commit (newer commit)</label>
+		<div class="control svelte-11u8c3u"><input value=""></div></div></div>
+
+<div class="box">Please select by tags or commits, in order to determine the availability of your patch file.</div>
 
 
 </main>
