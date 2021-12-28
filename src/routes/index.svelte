@@ -65,14 +65,37 @@ Overall the process should not take you more then five minutes.
 </script>
 
 <div class="box split">
+	<h1 class="title">NopCommerce Patch Generator</h1>
+	<p>
+		This tool generates a patches for NopCommerce. In order to download your patch file, please
+		select the NopCommerce release from an dropdown, or enter the start and end sha manually.
+	</p>
+	<br />
+	<ul class="notes">
+		Aditional notes:<br />
+		<li>
+			The patch file will be created relatively to the src directory of the nopcommerce repository.
+			Please be sure to apply your patch in the root of your project.
+		</li>
+		<li>The patch will also include update binary files such as images and dll's.</li>
+		<li>
+			If the patch file for your selection does not exist, we will redirect you to Github to create
+			an issue. From there on an automatic process takes places, and will generete the patch file
+			you. After the patch file is generated, you will be redirected back to the website to download
+			the patch.
+		</li>
+	</ul>
+</div>
+
+<div class="box split">
 	<div class="field">
-		<label class="label">Start tag (oldest)</label>
+		<label class="label">Start tag (older release)</label>
 		<div class="control">
 			<TagSelect {tags} bind:value={startSha} />
 		</div>
 	</div>
 	<div class="field">
-		<label class="label">End tag (newest)</label>
+		<label class="label">End tag (newer release)</label>
 		<div class="control">
 			<TagSelect {tags} bind:value={endSha} />
 		</div>
@@ -81,13 +104,13 @@ Overall the process should not take you more then five minutes.
 
 <div class="box split">
 	<div class="field">
-		<label class="label">Start commit (oldest)</label>
+		<label class="label">Start commit (older commit)</label>
 		<div class="control">
 			<input bind:value={startSha} />
 		</div>
 	</div>
 	<div class="field">
-		<label class="label">End commit (newest)</label>
+		<label class="label">End commit (newer commit)</label>
 		<div class="control">
 			<input bind:value={endSha} />
 		</div>
@@ -96,9 +119,9 @@ Overall the process should not take you more then five minutes.
 
 <div class="box">
 	{#if !startSha || !endSha}
-		Please select by tags or commits
+		Please select by tags or commits, in order to determine the availability of your patch file.
 	{:else if !downloadExists}
-		Your commit combination does not exist at the moment.<br />
+		A patch file for your selected commit range does not exist at the moment.<br />
 		But we would be more then happy to create it for you.<br />
 		We have created an automated process for you, which only takes a few minutes and will require you
 		to create an issue on github.<br />
@@ -124,5 +147,12 @@ Overall the process should not take you more then five minutes.
 	.box.split .field .control :global(select),
 	.box.split .field .control :global(input) {
 		width: 100%;
+	}
+
+	.notes {
+		color: gray;
+		font-size: smaller;
+		list-style: unset;
+		list-style-position: inside;
 	}
 </style>
