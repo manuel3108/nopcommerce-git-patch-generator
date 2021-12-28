@@ -35,7 +35,7 @@ jobs:
           title="${{ github.event.issue.title }}"
           shas=${title/Patch: /""}
           IFS=_ read startSha endSha <<< $shas
-          git --git-dir ./nopCommerce/.git diff $startSha\^..$endSha --relative=src > ./${startSha}_$endSha.patch
+          git --git-dir ./nopCommerce/.git diff $startSha\^..$endSha --binary --relative=src > ./${startSha}_$endSha.patch
           echo ::set-output name=file_path::"./${startSha}_$endSha.patch"
           echo ::set-output name=startSha::"${startSha}"
           echo ::set-output name=endSha::"${endSha}"
