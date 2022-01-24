@@ -13,7 +13,7 @@
 		<section class="modal-card-body">
 			<pre>
 cd your-working-dir
-git apply {fileName}
+git apply --reject --whitespace=fix {fileName}
 			</pre>
 		</section>
 		<footer class="modal-card-foot">
