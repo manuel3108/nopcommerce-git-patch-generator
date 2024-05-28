@@ -19,7 +19,7 @@ git apply --reject --whitespace=fix {fileName}
 		<footer class="modal-card-foot">
 			<button
 				class="button is-success"
-				on:click={() => navigator.clipboard.writeText(`git apply ${fileName}`)}
+				on:click={() => navigator.clipboard.writeText(`git apply --reject --whitespace=fix ${fileName}`)}
 				>Copy Git Command</button
 			>
 			<button class="button" on:click={() => (isOpen = false)}>Cancel</button>
